@@ -4,18 +4,20 @@ from scipy.constants import e, epsilon_0, pi
 import utils
 
 # Crear 2 cargas puntuales y visualizar su campo en 2D
-charge_list = []
+point_charge_list = []
 line_charge_list = []
 
 d = 0.4
-charge_list.append(utils.PointCharge(1, np.array([-d, -d])))
-charge_list.append(utils.PointCharge(-1, np.array([d, d])))
+point_charge_list.append(utils.PointCharge(1, np.array([-d, -d])))
+point_charge_list.append(utils.PointCharge(-1, np.array([d, d])))
+
+# Crear cargas lineales:
 d2 = 1
 line_charge_list.append(utils.InfiniteLineCharge(1, [0 , d2], [1, 0]))
 line_charge_list.append(utils.InfiniteLineCharge(-1, [0 , -d2], [1, 0]))
 
 
-print(f"Number of point charges = {len(charge_list)}")
+print(f"Number of point charges = {len(point_charge_list)}")
 
 # Definir Meshgrid 2D:
 grid_points = 71
@@ -32,18 +34,17 @@ print(f"Shape of the meshgrid: {X.shape}")
 Ex = np.zeros_like(X)
 Ey = np.zeros_like(Y)
 
-for charge in charge_list:
-    E_differential = utils.PointCharge.electric_field(charge, X, Y)
+for charge in point_charge_list:
+    E_differential = charge.electric_field(X, Y)
     # Sumar componentes del campo
     Ex += E_differential[0]
     Ey += E_differential[1]
 
 for charge in line_charge_list:
-    E_differential = utils.InfiniteLineCharge.electric_field(charge, X, Y)
+    E_differential = charge.electric_field(X, Y)
     # Sumar componentes del campo
     Ex += E_differential[0]
     Ey += E_differential[1]
-
 
 # PLOT:
 fig = plt.figure(figsize=(9, 9))
@@ -64,14 +65,16 @@ Ey_squashed = np.multiply(Ey, squashing) / E_mag
 ax.quiver(X, Y, Ex_squashed, Ey_squashed, width=0.0010)
 
 # === Graficar las cargas ===
-x = np.zeros(len(charge_list))
-y = np.zeros(len(charge_list))
+x = np.zeros(len(point_charge_list))
+y = np.zeros(len(point_charge_list))
 k = 0
-print(x)
-for charge in charge_list:
-    x[k] = charge.position[0]
-    y[k] = charge.position[1]
-    k += 1
+
+for charge in point_charge_list:
+    if isinstance(charge, utils.PointCharge):
+        x[k] = charge.position[0]
+        y[k] = charge.position[1]
+        k += 1
+
 ax.scatter(x, y, s=5, edgecolor='b', label='Carga')
 
 # Etiquetas y título

@@ -39,7 +39,9 @@ class PointCharge(Charge):
 
         # Si es un caso 2D, se define Z de manera auxiliar
         if Z is None or len(self.position) < 3:
-            is3d = False 
+            is3d = False
+        else:
+            is3d = True
 
         # Cálculo de distancia:
         Rx = X - self.position[0]
@@ -83,6 +85,8 @@ class PointCharge(Charge):
         # Si es un caso 2D, se define Z de manera auxiliar
         if Z is None or len(self.position) < 3:
             is3d = False 
+        else:
+            is3d = True
 
         # Cálculo de distancia:
         Rx = X - self.position[0]
@@ -127,6 +131,8 @@ class InfiniteLineCharge(Charge):
         # Si es un caso 2D, se define Z de manera auxiliar
         if Z is None or len(self.line_point) < 3 or len(self.line_direction) < 3:
             is3d = False
+        else:
+            is3d = True
 
         # Vector que va desde el punto Q de la línea al punto P = (x,y,z)
         QPx = X - self.line_point[0]
