@@ -8,13 +8,13 @@ point_charge_list = []
 line_charge_list = []
 
 d = 0.4
-# point_charge_list.append(utils.PointCharge(1, np.array([-d, -d, -d])))
-# point_charge_list.append(utils.PointCharge(-1, np.array([d, d, d])))
+point_charge_list.append(utils.PointCharge(1, np.array([-d, -d, -d])))
+point_charge_list.append(utils.PointCharge(-1, np.array([d, d, d])))
 
 # Crear cargas lineales:
 d2 = 1
-line_charge_list.append(utils.InfiniteLineCharge(1, [0 , d2, 0], [1, 0, 0]))
-line_charge_list.append(utils.InfiniteLineCharge(-1, [0 , -d2, 0], [1, 0, 0]))
+# line_charge_list.append(utils.InfiniteLineCharge(1, [0 , d2, 0], [1, 0, 0]))
+# line_charge_list.append(utils.InfiniteLineCharge(-1, [0 , -d2, 0], [1, 0, 0]))
 
 
 print(f"Number of point charges = {len(point_charge_list)}")
