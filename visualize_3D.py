@@ -20,7 +20,7 @@ d2 = 1
 print(f"Number of point charges = {len(point_charge_list)}")
 
 # Definir Meshgrid 2D:
-grid_points = 11
+grid_points = 7
 grid_size = 2
 
 x_space = np.linspace(-grid_size, grid_size, grid_points)
