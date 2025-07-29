@@ -8,8 +8,14 @@ point_charge_list = []
 line_charge_list = []
 
 d = 0.4
-point_charge_list.append(utils.PointCharge(1, np.array([-d, -d, -d])))
-point_charge_list.append(utils.PointCharge(-1, np.array([d, d, d])))
+point_charge_list.append(utils.PointCharge(1, np.array([0, 0, 0])))
+point_charge_list.append(utils.PointCharge(1, np.array([0, 0, 1])))
+point_charge_list.append(utils.PointCharge(1, np.array([0, 1, 0])))
+point_charge_list.append(utils.PointCharge(1, np.array([1, 0, 0])))
+point_charge_list.append(utils.PointCharge(1, np.array([1, 1, 0])))
+point_charge_list.append(utils.PointCharge(1, np.array([0, 1, 1])))
+point_charge_list.append(utils.PointCharge(1, np.array([1, 0, 1])))
+point_charge_list.append(utils.PointCharge(1, np.array([1, 1, 1])))
 
 # Crear cargas lineales:
 d2 = 1
@@ -19,9 +25,9 @@ d2 = 1
 
 print(f"Number of point charges = {len(point_charge_list)}")
 
-# Definir Meshgrid 2D:
-grid_points = 7
-grid_size = 2
+# Definir Meshgrid 3D:
+grid_points = 9
+grid_size = 1
 
 x_space = np.linspace(-grid_size, grid_size, grid_points)
 y_space = np.linspace(-grid_size, grid_size, grid_points)
@@ -83,7 +89,7 @@ for charge in point_charge_list:
         z[k] = charge.position[2]
         k += 1
 
-ax.scatter(x, y, z, s=5, edgecolor='b', label='Carga')
+ax.scatter(x, y, z, s=5, edgecolor='r', label='Carga')
 
 # Etiquetas y título
 ax.set_title("Campo eléctrico y distribución de cargas")
